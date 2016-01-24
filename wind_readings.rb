@@ -1,4 +1,4 @@
-#!/usr/bin/env/ruby
+#!/usr/bin/env ruby
 require_relative('functions')
 
 puts "\n***  Lake Pend Orielle Readings at Deep Moor Station     ***"

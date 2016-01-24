@@ -164,3 +164,30 @@ def output_results_table(results={})
 	end
 	puts
 end
+
+### API methods ###
+
+# Use the URL parameters for finding valid start and end dates
+def readings
+	start_date, end_date = query_user_for_date_range
+end
+
+def url_params_for_date_range
+	begin
+		start_date = Date.parse(params[:start])
+		end_date = Date.parse(params[:end])
+	rescue ArgumentError
+		halt "Invalid date format"
+	end
+
+	# Call our validations
+	if !date_valid?(end_date)
+		halt "Start date must be after #{DATA_START_DATE} and before today."
+	elsif !date_valid?(end_date)
+		halt "End date must be after #{DATA_START_DATE} and before today."
+	elsif !date_range_valid?(start_date, end_date)
+		halt "Invalid date range."
+	end
+
+	return start_date, end_date
+end
