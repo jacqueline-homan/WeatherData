@@ -5,6 +5,7 @@ require_relative('functions')
 require 'sinatra'
 require 'json'
 
+
 # Accessible via http://localhost:4567
 
 get '/' do 
@@ -18,25 +19,14 @@ get '/' do
 end
 
 get '/readings' do
-	#start_date, end_date = url_params_for_date_range
+	start_date, end_date = url_params_for_date_range
 
-	#results = get_and_compute_results(start_date, end_date)
+	results = get_and_compute_results(start_date, end_date)
 
-	#content_type :json
-	#erb results.to_json
-	erb :readings_form
-end 
-
-post '/readings' do
-    READING_TYPES = {
-	"Wind_Speed" => "Wind Speed",
-	"Air_Temp" => "Air Temp",
-	"Barometric_Press" => "mmHg (torr)"
-}
-
-    erb :start_date, :end_date => {'Start Date' => start_date, 'End Date' => end_date}
+	content_type :json
+	erb results.to_json
+	
 end
-
 
 
 not_found do
